@@ -51,6 +51,10 @@ angular
 		{
 			$scope.usuarioLogeado = jwtHelper.decodeToken($auth.getToken());
 			$scope.logeado = true;
+			if ($scope.usuarioLogeado.perfil == 'vendedor')
+				$scope.borrarProducto = true;
+			else
+				$scope.borrarProducto = false;
 		}
 		else
 		{

@@ -7,9 +7,8 @@
 	    <input type="password" placeholder="Repetir Clave" class="txtLogin" name="claveRepetida" ng-model='usuario.claveRepetida' required>
 	    <select ng-model="usuario.perfil" class="txtLogin" ng-if="admin">
 	    	<option value="admin">Administrador</option>
-	    	<option value="encargado">Encargado</option>
-	    	<option value="empleado">Empleado</option>
-	    	<option value="cliente">Cliente</option>
+	    	<option value="vendedor">Vendedor</option>
+	    	<option value="comprador">Comprador</option>
 	    </select>
         <div ng-show="uploader.isHTML5">
 		    <div nv-file-drop="" uploader="uploader">

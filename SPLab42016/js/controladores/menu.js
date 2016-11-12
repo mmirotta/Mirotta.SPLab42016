@@ -6,6 +6,14 @@ angular
 		$scope.usuarioLogeado = jwtHelper.decodeToken($auth.getToken());
 		$scope.logeado = true;
 		$scope.admin = true;
-		console.info("logueado");
+		if ($scope.usuarioLogeado.perfil != 'comprador')
+			$scope.nuevoProducto = true;
+		else
+			$scope.nuevoProducto = false;
 	}
+
+	$scope.Salir = function(){
+		$auth.logout();
+		$state.go("inicio");
+	};
   });

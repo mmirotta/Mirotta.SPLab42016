@@ -13,7 +13,7 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-                <li><a ui-sref="producto.alta()" ng-if="logeado && admin" style="color: #ffffff;">Nuevo Producto</a></li>
+                <li><a ui-sref="producto.alta()" ng-if="logeado && nuevoProducto" style="color: #ffffff;">Nuevo Producto</a></li>
                 <li><a ui-sref="login.registro()" ng-if="logeado && admin" style="color: #ffffff;">Nuevo Usuario</a></li>
                 <li><a ng-click="Salir()" ng-if="logeado" style="color: #ffffff;">Salir</a></li>
             </ul>
@@ -23,7 +23,7 @@
 <div class="intro-header"> 
     <div class="container">
         <a ui-sref="producto.productos()" ng-if="logeado" style="color: #ffffff;">Productos</a>
-        <a ui-sref="login.usuarios()" ng-if="logeado" style="color: #ffffff;">Usaurios</a>
+        <a ui-sref="login.usuarios()" ng-if="logeado && admin" style="color: #ffffff;">Usuarios</a>
     </div>
 </div>
 <!-- Footer -->

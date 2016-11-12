@@ -12,16 +12,16 @@ angular
       return Servicio.BuscarPor(entidad, parametro);
     }
 
-    function BuscarTodos(entidad){
-      return Servicio.BuscarTodos(entidad);
+    function BuscarTodos(){
+      return Servicio.BuscarTodos("usuarios");
     }
 
-    function Cargar(entidad, parametro){
-      return Servicio.Cargar(entidad, parametro);
+    function Cargar(parametro){
+      return Servicio.Cargar("usuario", parametro);
     }
 
-    function Guardar(entidad, parametro){
-      return Servicio.Guardar(entidad, JSON.stringify(parametro));
+    function Guardar(parametro){
+      return Servicio.Guardar("usuario", JSON.stringify(parametro));
     }
 
     return objeto;

@@ -1,8 +1,5 @@
 angular
 .module('spLab2016')
-.controller('UsuarioCtrl', function($scope, $state, $stateParams, $auth, $http, jwtHelper, FileUploader, FactoryUsuario) {
-
-})
 .controller('LoginCtrl', function($scope, $state, $auth, jwtHelper) {
 	$scope.usuario = {};
 	$scope.usuario.correo = "admin@utn.com";
@@ -24,10 +21,10 @@ angular
 
 .controller("RegistroCtrl", function($scope, $auth, $state, $http, jwtHelper, FileUploader, FactoryUsuario, FactoryRutas) {
 	$scope.usuario={};
-    $scope.usuario.nombre = "Cliente";
-    $scope.usuario.correo = "cliente@gmail.com";
-    $scope.usuario.clave = "cliente123";
-    $scope.usuario.claveRepetida = "cliente123";
+    $scope.usuario.nombre = "Comprador";
+    $scope.usuario.correo = "comprador@gmail.com";
+    $scope.usuario.clave = "123456";
+    $scope.usuario.claveRepetida = "123456";
     $scope.usuario.perfil = "comprador";
 
 	if ($auth.isAuthenticated())
@@ -59,39 +56,13 @@ angular
 				$scope.usuario.foto = $scope.usuario.foto + ';' + $scope.foto.file.name;
 		};
 
-		$scope.usuario.fechaCreacion = new Date();
-		FactoryUsuario.Guardar("usuario", $scope.usuario).then(function(respuesta) { 
-			if ($auth.isAuthenticated())
-			{  
-			  	$auth.login($scope.usuario)
-				.then(function(response){
-					if ($auth.isAuthenticated())
-					{
-						$state.go("inicio");
-					}
-					
-				}).catch(function(response){
-					console.info("NO volvio bien", response);
-				});
-			}
-			else
-			{
-		    	$state.go("inicio");
-		    }
-		},function(error) {
-			console.log(response);
+		FactoryUsuario.Guardar($scope.usuario).then(
+			function(respuesta) { 
+				console.log(respuesta);
+			},function(error) {
+				console.log(error);
 	 	});
 	};
-
-	$scope.uploader.onErrorItem = function(fileItem, response, status, headers) {
-        console.info('onErrorItem', fileItem, response, status, headers);
-    };
-    $scope.uploader.onCompleteItem = function(fileItem, response, status, headers) {
-	    console.info('onCompleteItem', fileItem, response, status, headers);
-	};
-    $scope.uploader.onCompleteAll = function() {
-        console.info('Se cargo con exito');
-    };
 })
 
 .controller("UsuarioModificarCtrl", function($scope, $auth, $state, $stateParams, $http, jwtHelper, FileUploader) {
@@ -108,11 +79,11 @@ angular
 
 	$scope.Guardar = function(){
 
-		$http.put('http://localhost:8080/TPlaboratorioIV2016/wsIndumentariaABCS/usuario/' + JSON.stringify($scope.usuario))
-		.then(function(respuesta) {     	
-		    $state.go("inicio");
-		},function errorCallback(response) {
-			console.log(response);
+		FactoryUsuario.Editar($scope.usuario).then(
+			function(respuesta) {     	
+		    	$state.go("inicio");
+			},function(error) {
+				console.log(error);
 	 	});
 	};
 })
@@ -129,7 +100,7 @@ angular
 		$state.go("inicio");
 	}
 
- 	FactoryUsuario.BuscarTodos('usuarios').then(
+ 	FactoryUsuario.BuscarTodos().then(
  		function(respuesta) {     	
   			$scope.ListadoUsuarios = respuesta;
     	},function(error) {

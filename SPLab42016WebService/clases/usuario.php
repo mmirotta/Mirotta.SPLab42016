@@ -15,70 +15,6 @@ class Usuario
   	public $activo;
 
 //--------------------------------------------------------------------------------//
-
-//--------------------------------------------------------------------------------//
-//--GETTERS Y SETTERS
-  	public function GetId()
-	{
-		return $this->id;
-	}
-	public function GetCorreo()
-	{
-		return $this->correo;
-	}
-	public function GetClave()
-	{
-		return $this->clave;
-	}
-	public function GetNombre()
-	{
-		return $this->nombre;
-	}
-	public function GetPerfil()
-	{
-		return $this->perfil;
-	}
-	public function GetFechaAcceso()
-	{
-	return $this->fechaAcceso;
-	}
-	public function GetFechaCreacion()
-	{
-	return $this->fechaCreacion;
-	}
-
-
-	public function SetId($valor)
-	{
-		$this->id = $valor;
-	}
-	public function SetCorreo($valor)
-	{
-		$this->correo = $valor;
-	}
-	public function SetClave($valor)
-	{
-		$this->clave = $valor;
-	}
-	public function SetNombre($valor)
-	{
-		$this->nombre = $valor;
-	}
-	public function SetPerfil($valor)
-	{
-		$this->perfil = $valor;
-	}
-	public function SetFechaAcceso($valor)
-	{
-		$this->fechaAcceso = $valor;
-	}
-	public function SetFechaCreacion($valor)
-	{
-		$this->fechaCreacion = $valor;
-	}
-
-
-//--------------------------------------------------------------------------------//
 //--METODO DE CLASE
 	public static function Cargar($idParametro) 
 	{	
@@ -123,7 +59,7 @@ class Usuario
 	public static function Borrar($id)
 	{	
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-		$consulta =$objetoAccesoDato->RetornarConsulta("DELETE FROM usuario WHERE id=:id");	
+		$consulta =$objetoAccesoDato->RetornarConsulta("UPDATE usuario SET activo=0 WHERE id=:id");	
 		$consulta->bindValue(':id',$id, PDO::PARAM_INT);		
 		$consulta->execute();
 		return $consulta->rowCount();
@@ -163,8 +99,8 @@ class Usuario
 	public static function Guardar($usuario)
 	{
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-		$consulta =$objetoAccesoDato->RetornarConsulta("INSERT INTO usuario (nombre,correo,clave,perfil,fechaCreacion,foto) 
-														VALUES(:nombre,:correo,:clave,:perfil,:fechaCreacion,:foto)");
+		$consulta =$objetoAccesoDato->RetornarConsulta("INSERT INTO usuario (nombre,correo,clave,perfil,foto, fechaAcceso,fechaCreacion,activo) 
+														VALUES(:nombre,:correo,:clave,:perfil,:foto,:fechaCreacion,:fechaCreacion,1)");
 		$consulta->bindValue(':nombre',$usuario->nombre, PDO::PARAM_STR);
 		$consulta->bindValue(':correo', $usuario->correo, PDO::PARAM_STR);
 		$consulta->bindValue(':clave', $usuario->clave, PDO::PARAM_STR);
