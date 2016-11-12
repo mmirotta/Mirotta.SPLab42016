@@ -22,7 +22,7 @@ angular
 	}
 })
 
-.controller("RegistroCtrl", function($scope, $auth, $state, $http, jwtHelper, FileUploader, FactoryUsuario) {
+.controller("RegistroCtrl", function($scope, $auth, $state, $http, jwtHelper, FileUploader, FactoryUsuario, FactoryRutas) {
 	$scope.usuario={};
     $scope.usuario.nombre = "Cliente";
     $scope.usuario.correo = "cliente@gmail.com";
@@ -37,7 +37,7 @@ angular
 		$scope.admin = true;
 	}
 
-	$scope.uploader = new FileUploader({url: 'http://localhost:8080/Mirotta.SPLab42016/SPLab42016WebService/archivos'});
+	$scope.uploader = new FileUploader({url: FactoryRutas.UrlArchivos});
 	$scope.uploader.queueLimit = 10; // indico cuantos archivos permito cargar
 				
 	/* Si quiero restringir los archivos a imagenes añado este filtro */
@@ -60,13 +60,7 @@ angular
 		};
 
 		$scope.usuario.fechaCreacion = new Date();
-		$http.post('http://localhost:8080/Mirotta.SPLab42016/SPLab42016WebService/usuario/' + JSON.stringify($scope.usuario))
-		.then(function(respuesta) {     	
-		    $state.go("inicio");
-		},function errorCallback(response) {
-				console.log(response);
-		 	});
-/*		FactoryUsuario.Guardar("usuario", $scope.usuario).then(function(respuesta) { 
+		FactoryUsuario.Guardar("usuario", $scope.usuario).then(function(respuesta) { 
 			if ($auth.isAuthenticated())
 			{  
 			  	$auth.login($scope.usuario)
@@ -86,7 +80,7 @@ angular
 		    }
 		},function(error) {
 			console.log(response);
-	 	});*/
+	 	});
 	};
 
 	$scope.uploader.onErrorItem = function(fileItem, response, status, headers) {

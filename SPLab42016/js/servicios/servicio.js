@@ -10,55 +10,43 @@ angular
     var url = FactoryRutas.UrlWebService;
 
     function TraerUrl(metodo, parametro){
+      if (!parametro)
+        return url + "/" + metodo;
+      else
         return url + "/" + metodo + "/" + parametro;
     }
 
     function BuscarTodos(entidad){
-      switch(entidad)
-      {
-        case "usuario":
-          return $http.get(TraerUrl('usuarios')).then(
-          function (respuesta){
-            return respuesta.data;
-          },
-          function (error){
-            return error;
-          }
-          );
-          break;
-      }
+      return $http.get(TraerUrl(entidad)).then(
+        function (respuesta){
+          return respuesta.data;
+        },
+        function (error){
+          return error;
+        }
+      );
     }
 
     function BuscarPor(entidad, parametro){
-      switch(entidad)
-      {
-        case "usuario":
-          return $http.get(TraerUrl('usuariosPorPerfil', parametro)).then(
-          function (respuesta){
-            return respuesta.data;
-          },
-          function (error){
-            return error;
-          }
-          );
-          break;
-      }
+      return $http.get(TraerUrl(entidad, parametro)).then(
+        function (respuesta){
+          return respuesta.data;
+        },
+        function (error){
+          return error;
+        }
+      );
     }
 
     function Cargar(entidad, parametro){
-      switch(entidad)
-      {
-        case "usuario":
-          return $http.get(TraerUrl('usuarios', parametro)).then(
-          function (respuesta){
-            return respuesta.data;
-          },
-          function (error){
-            return error;
-          }
-          );
-          break;
-      }
+      return $http.get(TraerUrl(entidad, parametro)).then(
+        function (respuesta){
+          return respuesta.data;
+        },
+        function (error){
+          return error;
+        }
+      );
     }
 
     function Guardar(entidad, parametro){
@@ -73,19 +61,14 @@ angular
     }
 
     function Editar(entidad, parametro){
-      switch(entidad)
-      {
-        case "usuario":
-          return $http.put(TraerUrl('usuario', parametro)).then(
-          function (respuesta){
-            return respuesta.data;
-          },
-          function (error){
-            return error;
-          }
-          );
-          break;
-      }
+      return $http.put(TraerUrl(entidad, parametro)).then(
+        function (respuesta){
+          return respuesta.data;
+        },
+        function (error){
+          return error;
+        }
+      );
     }
 
   })//Cierra Servicio

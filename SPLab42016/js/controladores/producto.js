@@ -1,6 +1,6 @@
 angular
   .module('spLab2016')
-  miApp.controller("ProductoAltaCtrl", function($scope, $auth, $state, $http, jwtHelper, FileUploader, FactoryProducto) {
+  .controller("ProductoAltaCtrl", function($scope, $auth, $state, $http, jwtHelper, FileUploader, FactoryProducto, FactoryRutas) {
 	if ($auth.isAuthenticated())
 	{
 		$scope.usuario = jwtHelper.decodeToken($auth.getToken());
@@ -11,7 +11,7 @@ angular
 		$state.go("inicio");
 	}
 	
-	$scope.uploader = new FileUploader({url: 'http://localhost:8080/Mirotta.SPLab42016/SPLab42016WebService/archivos'});
+	$scope.uploader = new FileUploader({url: FactoryRutas.UrlArchivos});
 	$scope.uploader.queueLimit = 10; // indico cuantos archivos permito cargar
 				
 	/* Si quiero restringir los archivos a imagenes añado este filtro */
@@ -38,12 +38,6 @@ angular
 				$scope.producto.foto = $scope.usuario.foto + ';' + $scope.foto.file.name;
 		};
 
-		$http.post('http://localhost:8080/Mirotta.SPLab42016/SPLab42016WebService/producto/' + JSON.stringify($scope.producto))
-		.then(function(respuesta) {     	
-		    console.log(respuesta);
-		},function errorCallback(response) {
-				console.log(response);
-		 	});
 		FactoryProducto.Guardar("producto", $scope.producto).then(function(respuesta) {     	
 		    console.log(respuesta);
 		},function errorCallback(response) {
@@ -61,27 +55,24 @@ angular
         console.info('Se cargo con exito');
     };
   })
-  .controller("ProductosCtrl", function($scope, $http, $state, $auth) {
+  .controller("ProductosCtrl", function($scope, $http, $state, $auth, jwtHelper, FactoryProducto) {
 		if ($auth.isAuthenticated())
 		{
-			console.info("token", $auth.getPayload());
+			$scope.usuarioLogeado = jwtHelper.decodeToken($auth.getToken());
 			$scope.logeado = true;
 		}
 		else
 		{
-			console.info("no token", $auth.getPayload());
 			$scope.logeado = false;
 			$state.go("inicio");
 		}
-	 	$http.get('http://localhost:8080/TPlaboratorioIV2016/wsIndumentariaABCS/locales')
-	 	.then(function(respuesta) {     	
-	      	 $scope.ListadoLocales = respuesta.data;
-	      	 console.log(respuesta);
-	    },function errorCallback(response) {
-	     		 $scope.ListadoLocales= [];
-	     		console.log(response);
 
-	 	 });
+	 	FactoryProducto.BuscarTodos('productos').then(
+	 		function(respuesta) {     	
+      			$scope.ListadoProductos = respuesta;
+	    	},function(error) {
+     			$scope.ListadoProductos= [];
+	 	});
 	});
 
 

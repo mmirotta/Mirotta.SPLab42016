@@ -13,7 +13,7 @@ angular
     }
 
     function BuscarTodos(entidad){
-      return Servicio.BuscarPor(entidad);
+      return Servicio.BuscarTodos(entidad);
     }
 
     function Cargar(entidad, parametro){
