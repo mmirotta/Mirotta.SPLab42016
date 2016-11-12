@@ -20,7 +20,9 @@ angular
       return Servicio.Cargar(entidad, parametro);
     }
 
-    function Guardar(entidad){
-      return Servicio.Guardar(entidad);
+    function Guardar(entidad, parametro){
+      return Servicio.Guardar(entidad, JSON.stringify(parametro));
     }
-  })//Cierra Servicio
+
+    return objeto;
+  })//Cierra Factory Producto

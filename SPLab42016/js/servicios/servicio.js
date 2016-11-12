@@ -2,13 +2,14 @@ angular
   .module('spLab2016')
   .service('Servicio', function ($http, FactoryRutas) {
     this.Nombre = "Servicio";
-    this.TraerPorPerfil = TraerPorPerfil;
+    this.BuscarTodos = BuscarTodos;
+    this.BuscarPor = BuscarPor;
+    this.Cargar = Cargar;
+    this.Guardar = Guardar;
+    this.Editar = Editar;
     var url = FactoryRutas.UrlWebService;
 
     function TraerUrl(metodo, parametro){
-      if (!parametro)
-        return url;
-      else
         return url + "/" + metodo + "/" + parametro;
     }
 
@@ -61,10 +62,21 @@ angular
     }
 
     function Guardar(entidad, parametro){
+      return $http.post(TraerUrl(entidad, parametro)).then(
+        function (respuesta){
+          return respuesta;
+        },
+        function (error){
+          return error;
+        }
+      );
+    }
+
+    function Editar(entidad, parametro){
       switch(entidad)
       {
         case "usuario":
-          return $http.get(TraerUrl('usuarios', parametro)).then(
+          return $http.put(TraerUrl('usuario', parametro)).then(
           function (respuesta){
             return respuesta.data;
           },

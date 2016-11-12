@@ -1,6 +1,6 @@
 angular
   .module('spLab2016')
-  miApp.controller("ProductoAltaCtrl", function($scope, $auth, $state, $http, jwtHelper, FileUploader) {
+  miApp.controller("ProductoAltaCtrl", function($scope, $auth, $state, $http, jwtHelper, FileUploader, FactoryProducto) {
 	if ($auth.isAuthenticated())
 	{
 		$scope.usuario = jwtHelper.decodeToken($auth.getToken());
@@ -11,7 +11,7 @@ angular
 		$state.go("inicio");
 	}
 	
-	$scope.uploader = new FileUploader({url: 'http://localhost:8080/TPlaboratorioIV2016/wsIndumentariaABCS/archivos'});
+	$scope.uploader = new FileUploader({url: 'http://localhost:8080/Mirotta.SPLab42016/SPLab42016WebService/archivos'});
 	$scope.uploader.queueLimit = 10; // indico cuantos archivos permito cargar
 				
 	/* Si quiero restringir los archivos a imagenes añado este filtro */
@@ -23,27 +23,28 @@ angular
         }
     });
 
-	$scope.local={};
-    $scope.local.direccion = "Av. Rivadavia";
-    $scope.local.numero = "7302";
-    $scope.local.localidad = "Capital Federal";
-    $scope.local.provincia = "Buenos Aires";
-    $scope.local.longitud = "-58.468439";
-    $scope.local.latitud = "-34.629645";
-    $scope.local.sucursal = "Flores";
+	$scope.producto={};
+    $scope.producto.nombre = "Producto 1";
+    $scope.producto.descripcion = "Producto 1";
+    $scope.producto.precio = "15";
 
 	$scope.Guardar = function(){
 		$scope.uploader.uploadAll();
 		for (var i = 0; i < $scope.uploader.queue.length; i++) {
 			$scope.foto = $scope.uploader.queue[i];
 			if (i==0)
-				$scope.local.foto = $scope.foto.file.name;
+				$scope.producto.foto = $scope.foto.file.name;
 			else
-				$scope.local.foto = $scope.usuario.foto + ';' + $scope.foto.file.name;
+				$scope.producto.foto = $scope.usuario.foto + ';' + $scope.foto.file.name;
 		};
 
-		$http.post('http://localhost:8080/TPlaboratorioIV2016/wsIndumentariaABCS/local/' + JSON.stringify($scope.local))
+		$http.post('http://localhost:8080/Mirotta.SPLab42016/SPLab42016WebService/producto/' + JSON.stringify($scope.producto))
 		.then(function(respuesta) {     	
+		    console.log(respuesta);
+		},function errorCallback(response) {
+				console.log(response);
+		 	});
+		FactoryProducto.Guardar("producto", $scope.producto).then(function(respuesta) {     	
 		    console.log(respuesta);
 		},function errorCallback(response) {
 				console.log(response);

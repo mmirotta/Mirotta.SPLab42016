@@ -1,11 +1,9 @@
 angular
   .module('spLab2016')
-  .factory('FactoryRutas', function ($http) {
+  .factory('FactoryRutas', function () {
     var objeto = {};
     objeto.Nombre = "Factory Rutas";
-    objeto.UrlWebService = UrlWebService;
+    objeto.UrlWebService = "http://localhost:8080/Mirotta.SPLab42016/SPLab42016WebService";
 
-    function UrlWebService(){
-      return "http://localhost:8080/Mirotta.SPLab42016/webService/";
-    }
-  })//Cierra Servicio
+    return objeto;
+  })//Cierra Fatory Rutas

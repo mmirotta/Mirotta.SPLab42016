@@ -2,7 +2,7 @@ var miApp = angular.module('spLab2016', ['ui.router', 'angularFileUpload','satel
 
 miApp.config(function($stateProvider, $urlRouterProvider, $authProvider){
 	//proveedor de autentificacion.
-	$authProvider.loginUrl = 'http://localhost:8080/Mirotta.SPLab42016/webService/jwt/php/auth.php';
+	$authProvider.loginUrl = 'http://localhost:8080/Mirotta.SPLab42016/SPLab42016WebService/jwt/php/auth.php';
 	$authProvider.tokenName = 'MiTokenGeneradoEnPHP';
 	$authProvider.tokenPrefix = 'Aplicacion';
 	//$authProvider.authReader = 'data';
@@ -14,6 +14,7 @@ miApp.config(function($stateProvider, $urlRouterProvider, $authProvider){
 			"inicio",
 			{
 				url:"/inicio",
+				cache:false,
 				templateUrl:"vistas/inicio.html",
 				controller:"InicioCtrl"
 			}
@@ -23,6 +24,7 @@ miApp.config(function($stateProvider, $urlRouterProvider, $authProvider){
 			"login",
 			{
 				url:"/login",
+				cache:false,
 				abstract:true, 
 				templateUrl:"vistas/usuario/abstractaLogin.html"
 			}
@@ -32,6 +34,7 @@ miApp.config(function($stateProvider, $urlRouterProvider, $authProvider){
 			"login.login",
 			{
 				url:"/login",
+				cache:false,
 				views:{
 					"contenido": {
 					templateUrl:"vistas/usuario/login.html",
@@ -45,6 +48,7 @@ miApp.config(function($stateProvider, $urlRouterProvider, $authProvider){
 			"login.registro",
 			{
 				url:"/registro",
+				cache:false,
 				views:{
 					"contenido": {
 					templateUrl:"vistas/usuario/registro.html",
@@ -112,6 +116,15 @@ miApp.config(function($stateProvider, $urlRouterProvider, $authProvider){
 					controller:"ProductosCtrl"
 					}
 				}
+			}
+		)
+
+		.state(
+			"menu",
+			{
+				url:"/menu",
+				templateUrl:"vistas/menu.html",
+				controller:"MenuCtrl"
 			}
 		)
 

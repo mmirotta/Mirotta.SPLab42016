@@ -5,15 +5,15 @@ angular
 })
 .controller('LoginCtrl', function($scope, $state, $auth, jwtHelper) {
 	$scope.usuario = {};
-	$scope.usuario.correo = "admin@indumentariaABCS.com";
-	$scope.usuario.clave = "Admin123$";
+	$scope.usuario.correo = "admin@utn.com";
+	$scope.usuario.clave = "123456";
 
 	$scope.Verificar = function(){
 		$auth.login($scope.usuario)
 			.then(function(response){
 				if ($auth.isAuthenticated())
 				{
-					$state.go("inicio");
+					$state.go("menu");
 				}
 				
 			}).catch(function(response){
@@ -21,13 +21,14 @@ angular
 			});
 	}
 })
-.controller("RegistroCtrl", function($scope, $auth, $state, $http, jwtHelper, FileUploader) {
+
+.controller("RegistroCtrl", function($scope, $auth, $state, $http, jwtHelper, FileUploader, FactoryUsuario) {
 	$scope.usuario={};
     $scope.usuario.nombre = "Cliente";
     $scope.usuario.correo = "cliente@gmail.com";
     $scope.usuario.clave = "cliente123";
     $scope.usuario.claveRepetida = "cliente123";
-    $scope.usuario.perfil = "cliente";
+    $scope.usuario.perfil = "comprador";
 
 	if ($auth.isAuthenticated())
 	{
@@ -36,7 +37,7 @@ angular
 		$scope.admin = true;
 	}
 
-	$scope.uploader = new FileUploader({url: 'http://localhost:8080/TPlaboratorioIV2016/wsIndumentariaABCS/archivos'});
+	$scope.uploader = new FileUploader({url: 'http://localhost:8080/Mirotta.SPLab42016/SPLab42016WebService/archivos'});
 	$scope.uploader.queueLimit = 10; // indico cuantos archivos permito cargar
 				
 	/* Si quiero restringir los archivos a imagenes añado este filtro */
@@ -59,8 +60,13 @@ angular
 		};
 
 		$scope.usuario.fechaCreacion = new Date();
-		$http.post('http://localhost:8080/TPlaboratorioIV2016/wsIndumentariaABCS/usuario/' + JSON.stringify($scope.usuario))
-		.then(function(respuesta) { 
+		$http.post('http://localhost:8080/Mirotta.SPLab42016/SPLab42016WebService/usuario/' + JSON.stringify($scope.usuario))
+		.then(function(respuesta) {     	
+		    $state.go("inicio");
+		},function errorCallback(response) {
+				console.log(response);
+		 	});
+/*		FactoryUsuario.Guardar("usuario", $scope.usuario).then(function(respuesta) { 
 			if ($auth.isAuthenticated())
 			{  
 			  	$auth.login($scope.usuario)
@@ -78,9 +84,9 @@ angular
 			{
 		    	$state.go("inicio");
 		    }
-		},function errorCallback(response) {
+		},function(error) {
 			console.log(response);
-	 	});
+	 	});*/
 	};
 
 	$scope.uploader.onErrorItem = function(fileItem, response, status, headers) {
@@ -93,6 +99,7 @@ angular
         console.info('Se cargo con exito');
     };
 })
+
 .controller("UsuarioModificarCtrl", function($scope, $auth, $state, $stateParams, $http, jwtHelper, FileUploader) {
 	if ($auth.isAuthenticated())
 	{
@@ -115,6 +122,7 @@ angular
 	 	});
 	};
 })
+
 .controller("UsuariosCtrl", function($scope, $http, $state, $auth, $stateParams, jwtHelper) {
  	$scope.perfil = $stateParams.perfil;
 	if ($auth.isAuthenticated())
@@ -130,7 +138,7 @@ angular
 				break;
 
 			case "encargado":
-					if ($scope.perfil == "empleado")
+					if ($scope.perfil == "vendedor")
 						$scope.editar = true;
 				break;
 		}
