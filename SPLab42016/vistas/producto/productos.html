@@ -1,4 +1,7 @@
 <div class="container" style="margin-top:5%">
+    <div class="{{resultado.estilo}}" ng-show="resultado.ver">
+        <span style="font-size:26px;">{{resultado.mensaje}}</span>
+    </div>
 	<h1>Productos</h1>
 	<div class="divListaProductos" ng-repeat="producto in ListadoProductos">
 		<div class="row" style="padding: 5px;">

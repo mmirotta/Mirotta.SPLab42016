@@ -118,10 +118,20 @@ $app->put('/usuario/{usuario}', function ($request, $response, $args) {
     return $response;
 });
 
+$app->put('/producto/{usuario}', function ($request, $response, $args) {
+    Producto::Editar(json_decode($args['usuario']));
+    return $response;
+});
+
 
 // /* DELETE: Para eliminar recursos ELIMINAR*/
 $app->delete('/usuario/{id}', function ($request, $response, $args) {
     Usuario::Borrar($args['id']);
+    return $response;
+});
+
+$app->delete('/producto/{id}', function ($request, $response, $args) {
+    Producto::Borrar($args['id']);
     return $response;
 });
 

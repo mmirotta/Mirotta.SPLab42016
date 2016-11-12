@@ -7,6 +7,8 @@ angular
     this.Cargar = Cargar;
     this.Guardar = Guardar;
     this.Editar = Editar;
+    this.Borrar = Borrar;
+    
     var url = FactoryRutas.UrlWebService;
 
     function TraerUrl(metodo, parametro){
@@ -40,6 +42,17 @@ angular
 
     function Cargar(entidad, parametro){
       return $http.get(TraerUrl(entidad, parametro)).then(
+        function (respuesta){
+          return respuesta.data;
+        },
+        function (error){
+          return error;
+        }
+      );
+    }
+
+    function Borrar(entidad, parametro){
+      return $http.delete(TraerUrl(entidad, parametro)).then(
         function (respuesta){
           return respuesta.data;
         },

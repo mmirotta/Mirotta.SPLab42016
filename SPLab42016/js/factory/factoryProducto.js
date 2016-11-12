@@ -7,21 +7,26 @@ angular
     objeto.BuscarPor = BuscarPor;
     objeto.Guardar = Guardar;
     objeto.Cargar = Cargar;
+    objeto.Borrar = Borrar;
 
     function BuscarPor(entidad, parametro){
       return Servicio.BuscarPor(entidad, parametro);
     }
 
-    function BuscarTodos(entidad){
-      return Servicio.BuscarTodos(entidad);
+    function BuscarTodos(){
+      return Servicio.BuscarTodos('productos');
     }
 
-    function Cargar(entidad, parametro){
-      return Servicio.Cargar(entidad, parametro);
+    function Cargar(parametro){
+      return Servicio.Cargar('producto', parametro);
     }
 
-    function Guardar(entidad, parametro){
-      return Servicio.Guardar(entidad, JSON.stringify(parametro));
+    function Borrar(parametro){
+      return Servicio.Borrar('producto', parametro);
+    }    
+
+    function Guardar(parametro){
+      return Servicio.Guardar('producto', JSON.stringify(parametro));
     }
 
     return objeto;

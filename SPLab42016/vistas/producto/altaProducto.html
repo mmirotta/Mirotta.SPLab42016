@@ -1,12 +1,15 @@
 <div class="divAltaLocal" name="formProducto">
     <div class="row">
+	    <div class="{{resultado.estilo}}" ng-show="resultado.ver">
+	        <span style="font-size:26px;">{{resultado.mensaje}}</span>
+	    </div>
         <h2 class="h2Login">Nuevo Producto:</h2>
     </div>
     <div class="row">
     	<div class="col-lg-4">
 			<div ng-show="uploader.isHTML5">
 			    <div nv-file-drop="" uploader="uploader">
-			        <div nv-file-over="" uploader="uploader" over-class="another-file-over-class" class="well my-drop-zone">
+			        <div nv-file-over="" uploader="uploader" over-class="another-file-over-class" class="well my-drop-zone" style="height: 50%; margin-top: 20px;">
 			            Arrastre la imagen
 			        </div>
 			    </div>
