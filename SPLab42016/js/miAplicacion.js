@@ -123,6 +123,7 @@ miApp.config(function($stateProvider, $urlRouterProvider, $authProvider){
 			"menu",
 			{
 				url:"/menu",
+				cache:false,
 				templateUrl:"vistas/menu.html",
 				controller:"MenuCtrl"
 			}

@@ -17,6 +17,11 @@ angular
 				console.info("NO volvio bien", response);
 			});
 	}
+
+	$scope.Acceso = function(correo, clave){
+		$scope.usuario.correo = correo;
+		$scope.usuario.clave = clave;
+	}
 })
 
 .controller("RegistroCtrl", function($scope, $auth, $state, $http, jwtHelper, FileUploader, FactoryUsuario, FactoryRutas) {

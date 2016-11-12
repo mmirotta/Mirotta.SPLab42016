@@ -5,11 +5,21 @@ angular
 	{
 		$scope.usuarioLogeado = jwtHelper.decodeToken($auth.getToken());
 		$scope.logeado = true;
-		$scope.admin = true;
-		if ($scope.usuarioLogeado.perfil != 'comprador')
+		console.info($scope.usuarioLogeado.perfil);
+		if ($scope.usuarioLogeado.perfil != "comprador")
+		{
+			console.info($scope.usuarioLogeado.perfil);
 			$scope.nuevoProducto = true;
+		}
 		else
+		{
 			$scope.nuevoProducto = false;
+		}
+
+		if ($scope.usuarioLogeado.perfil == "admin")
+			$scope.admin = true;
+		else
+			$scope.admin = false;
 	}
 
 	$scope.Salir = function(){
