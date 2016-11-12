@@ -8,6 +8,4 @@ angular
 		$scope.admin = true;
 		console.info("logueado");
 	}
-
-
   });
