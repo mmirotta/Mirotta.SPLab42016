@@ -123,7 +123,6 @@ angular
 				$scope.resultado.mensaje = "Error al borrar un producto";
 		 	}
 	 	}
-	});
+  });
 
-
-  ;// cierra modulo
+;// cierra modulo
