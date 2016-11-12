@@ -1,9 +1,11 @@
 <div class="divLogin" name="loginForm">
+    <div class="{{resultado.estilo}}" ng-show="resultado.ver">
+        <span style="font-size:26px;">{{resultado.mensaje}}</span>
+    </div>
     <div class="row">
         <h2 class="h2Login">Modificar cuenta:</h2>
     	<input type="text" placeholder="Nombre" class="txtLogin" name="nombre" ng-model='usuario.nombre' required>
 	    <input type="text" placeholder="Usuario" class="txtLogin" name="correo" ng-model='usuario.correo' required>
-	    <input type="checkbox" text="Activo" ng-model="activo">Activo
 	    <input type="submit" value="Guardar" class="btnLogin" ng-disabled="formAlta.$invalid" ng-click="Guardar()">
     </div>
 </form>
