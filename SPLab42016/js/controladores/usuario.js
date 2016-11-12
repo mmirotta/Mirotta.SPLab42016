@@ -117,40 +117,24 @@ angular
 	};
 })
 
-.controller("UsuariosCtrl", function($scope, $http, $state, $auth, $stateParams, jwtHelper) {
- 	$scope.perfil = $stateParams.perfil;
+.controller("UsuariosCtrl", function($scope, $http, $state, $auth, jwtHelper, FactoryUsuario) {
 	if ($auth.isAuthenticated())
 	{
 		$scope.usuario = jwtHelper.decodeToken($auth.getToken());
 		$scope.usuario.logeado = true;
 	    $scope.editar = false;
-
-		switch($scope.usuario.perfil)
-		{
-			case "admin":
-					$scope.editar = true;
-				break;
-
-			case "encargado":
-					if ($scope.perfil == "vendedor")
-						$scope.editar = true;
-				break;
-		}
 	}
 	else
 	{
 		$state.go("inicio");
 	}
 
- 	$http.get('http://localhost:8080/TPlaboratorioIV2016/wsIndumentariaABCS/usuariosPorPerfil/' + $scope.perfil)
- 	.then(function(respuesta) {     	
-      	 $scope.ListadoUsuarios = respuesta.data;
-      	 console.log(respuesta);
-    },function errorCallback(response) {
-     		 $scope.ListadoUsuarios= [];
-     		console.log(response);
-
- 	 });
+ 	FactoryUsuario.BuscarTodos('usuarios').then(
+ 		function(respuesta) {     	
+  			$scope.ListadoUsuarios = respuesta;
+    	},function(error) {
+ 			$scope.ListadoUsuarios= [];
+ 	});
 
  	$scope.Modificar = function(usuario){
  		var param = JSON.stringify(usuario);

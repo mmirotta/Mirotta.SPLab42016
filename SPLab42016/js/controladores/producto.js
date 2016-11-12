@@ -38,22 +38,13 @@ angular
 				$scope.producto.foto = $scope.usuario.foto + ';' + $scope.foto.file.name;
 		};
 
-		FactoryProducto.Guardar("producto", $scope.producto).then(function(respuesta) {     	
-		    console.log(respuesta);
-		},function errorCallback(response) {
-				console.log(response);
-		 	});
+		FactoryProducto.Guardar("producto", $scope.producto).then(
+			function(respuesta) {     	
+		    	console.log(respuesta);
+			},function(error) {
+				console.log(error);
+		 });
 	};
-
-	$scope.uploader.onErrorItem = function(fileItem, response, status, headers) {
-        console.info('onErrorItem', fileItem, response, status, headers);
-    };
-    $scope.uploader.onCompleteItem = function(fileItem, response, status, headers) {
-	    console.info('onCompleteItem', fileItem, response, status, headers);
-	};
-    $scope.uploader.onCompleteAll = function() {
-        console.info('Se cargo con exito');
-    };
   })
   .controller("ProductosCtrl", function($scope, $http, $state, $auth, jwtHelper, FactoryProducto) {
 		if ($auth.isAuthenticated())

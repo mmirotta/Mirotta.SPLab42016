@@ -74,7 +74,7 @@ miApp.config(function($stateProvider, $urlRouterProvider, $authProvider){
 		.state(
 			"login.usuarios",
 			{
-				url:"/usuarios/:perfil",
+				url:"/usuarios",
 				views:{
 					"contenido": {
 					templateUrl:"vistas/usuario/usuarios.html",
