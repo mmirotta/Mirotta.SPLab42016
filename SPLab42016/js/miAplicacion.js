@@ -62,6 +62,7 @@ miApp.config(function($stateProvider, $urlRouterProvider, $authProvider){
 			"login.usuario",
 			{
 				url:"/usuario/:usuario",
+				cache:false,
 				views:{
 					"contenido": {
 					templateUrl:"vistas/usuario/modificarUsuario.html",
@@ -75,6 +76,7 @@ miApp.config(function($stateProvider, $urlRouterProvider, $authProvider){
 			"login.usuarios",
 			{
 				url:"/usuarios",
+				cache:false,
 				views:{
 					"contenido": {
 					templateUrl:"vistas/usuario/usuarios.html",
@@ -85,9 +87,24 @@ miApp.config(function($stateProvider, $urlRouterProvider, $authProvider){
 		)
 
 		.state(
+			"login.usuariosDirectiva",
+			{
+				url:"/usuarios",
+				cache:false,
+				views:{
+					"contenido": {
+					templateUrl:"vistas/usuario/usuariosConDirectiva.html",
+					controller:"UsuariosCtrl"
+					}
+				}
+			}
+		)
+
+		.state(
 			"producto",
 			{
 				url:"/producto",
+				cache:false,
 				abstract:true, 
 				templateUrl:"vistas/producto/abstractaProducto.html"
 			}
@@ -97,6 +114,7 @@ miApp.config(function($stateProvider, $urlRouterProvider, $authProvider){
 			"producto.alta",
 			{
 				url:"/alta",
+				cache:false,
 				views:{
 					"contenido": {
 					templateUrl:"vistas/producto/altaProducto.html",
@@ -110,9 +128,24 @@ miApp.config(function($stateProvider, $urlRouterProvider, $authProvider){
 			"producto.productos",
 			{
 				url:"/productos",
+				cache:false,
 				views:{
 					"contenido": {
 					templateUrl:"vistas/producto/productos.html",
+					controller:"ProductosCtrl"
+					}
+				}
+			}
+		)
+
+		.state(
+			"producto.productosDirectiva",
+			{
+				url:"/productos",
+				cache:false,
+				views:{
+					"contenido": {
+					templateUrl:"vistas/producto/productosConDirectiva.html",
 					controller:"ProductosCtrl"
 					}
 				}

@@ -23,7 +23,9 @@
 <div class="intro-header"> 
     <div class="container">
         <a ui-sref="producto.productos()" ng-if="logeado" style="color: #ffffff;">Productos</a>
-        <a ui-sref="login.usuarios()" ng-if="logeado && admin" style="color: #ffffff;">Usuarios</a>
+        <a ui-sref="login.usuarios()" ng-if="logeado && admin" style="color: #ffffff;">Usuarios</a><br />
+        <a ui-sref="producto.productosDirectiva()" ng-if="logeado" style="color: #ffffff;">Productos Directiva</a>
+        <a ui-sref="login.usuariosDirectiva()" ng-if="logeado && admin" style="color: #ffffff;">Usuarios Directiva</a>
     </div>
 </div>
 <!-- Footer -->

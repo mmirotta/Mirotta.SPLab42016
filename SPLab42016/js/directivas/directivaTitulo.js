@@ -1,12 +1,12 @@
 angular
-  .module('app')
+  .module('spLab2016')
   .directive('utnTitulo', function() {
     return {
       scope:{
-        mititulo: '@miparametro'
+        titulo: '@titulo'
       },
       replace: true,
-      restrict: "E", 
+      restrict: "EA", 
       templateUrl: "templates/titulo.html"
     };
   })

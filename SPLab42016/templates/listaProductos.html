@@ -1,0 +1,15 @@
+<div class="row" style="padding: 5px;">
+	<div class="col-lg-1">
+		<img style="width:80px; border-radius:50%" src="">
+	</div>
+	<div class="col-lg-8">
+		<h4 style="100%">{{producto.nombre}}</h4>
+		<p>Descripcion: {{producto.descripcion}}</p>
+	</div>
+	<div class="col-lg-1">
+		<p>${{producto.precio}}</p>
+	</div>
+	<div class="col-lg-1">
+		<a ng-click="Borrar({{producto}})" ng-if="borrarProducto"><i class="fa fa-trash fa-3x"></i></a>
+	</div>
+</div>

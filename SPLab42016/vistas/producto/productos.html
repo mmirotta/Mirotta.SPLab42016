@@ -2,7 +2,7 @@
     <div class="{{resultado.estilo}}" ng-show="resultado.ver">
         <span style="font-size:26px;">{{resultado.mensaje}}</span>
     </div>
-	<h1>Productos</h1>
+	<utn-titulo titulo="Listado de Productos"></utn-titulo>
 	<div class="divListaProductos" ng-repeat="producto in ListadoProductos">
 		<div class="row" style="padding: 5px;">
 			<div class="col-lg-1">
@@ -16,7 +16,7 @@
 				<p>${{producto.precio}}</p>
 			</div>
 			<div class="col-lg-1">
-				<a ng-click="Borrar(producto)" ng-if="borrarProducto"><i class="fa fa-trash fa-3x"></i></a>
+				<a ng-click="Borrar({{producto}})" ng-if="borrarProducto"><i class="fa fa-trash fa-3x"></i></a>
 			</div>
 		</div>
 	</div>

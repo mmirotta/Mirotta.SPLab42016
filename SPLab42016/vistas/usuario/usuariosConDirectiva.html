@@ -1,0 +1,9 @@
+<div class="container" style="margin-top:5%">
+    <div class="{{resultado.estilo}}" ng-show="resultado.ver">
+        <span style="font-size:26px;">{{resultado.mensaje}}</span>
+    </div>
+	<utn-titulo titulo="Listado de Usuarios"></utn-titulo>
+	<div class="divListaUsuarios" ng-repeat="usuario in ListadoUsuarios">
+		<utn-lista-usuarios usuario="usuario"></utn-lista-usuarios>
+	</div>
+</div>
