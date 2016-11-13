@@ -141,6 +141,7 @@ angular
 	{
 		$scope.resultado = {};
 		$scope.resultado.ver = true;
+		$scope.buscarPerfil = "todos";
 		if ($auth.isAuthenticated())
 		{
 			$scope.usuario = jwtHelper.decodeToken($auth.getToken());
@@ -186,6 +187,39 @@ angular
 	 		$scope.resultado.ver = true;
 	 		$scope.resultado.estilo = "alert alert-danger";
 			$scope.resultado.mensaje = "Error al borrar un usuario";
+	 	}
+ 	}
+
+ 	$scope.Buscar = function(){
+ 		try
+ 		{
+ 			if ($scope.buscarPerfil == "todos")
+ 			{
+				$scope.ListadoUsuarios = [];
+	 			FactoryUsuario.BuscarTodos().then(
+			 		function(respuesta) {     	
+			  			$scope.ListadoUsuarios = respuesta;
+			    	},function(error) {
+			 			$scope.ListadoUsuarios= [];
+			 	});
+ 			}
+ 			else
+ 			{
+	 			$scope.ListadoUsuarios = [];
+	 			FactoryUsuario.BuscarPor("usuariosPorPerfil", $scope.buscarPerfil).then(
+			 		function(respuesta) {     	
+			  			$scope.ListadoUsuarios = respuesta;
+			    	},function(error) {
+			 			$scope.ListadoUsuarios= [];
+			 	});
+	 		}
+ 		}
+	 	catch(error)
+	 	{
+	 		console.info(error);
+	 		$scope.resultado.ver = true;
+	 		$scope.resultado.estilo = "alert alert-danger";
+			$scope.resultado.mensaje = "Error al bucar por perfil";
 	 	}
  	}
 });
