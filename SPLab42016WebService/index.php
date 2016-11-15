@@ -135,20 +135,6 @@ $app->delete('/producto/{id}', function ($request, $response, $args) {
     return $response;
 });
 
-/*Archivos*/
-$app->post('/archivos', function ($request, $response, $args) {
-    if ( !empty( $_FILES ) ) {
-    $tempPath = $_FILES[ 'file' ][ 'tmp_name' ];
-    $uploadPath = "fotos" . DIRECTORY_SEPARATOR . $_FILES[ 'file' ][ 'name' ];
-    move_uploaded_file( $tempPath, $uploadPath );
-    $answer = array( 'answer' => 'Archivo Cargado!!' );
-    $json = json_encode( $answer );
-} else {
-    echo 'Sin Archivos';
-}
-    return $response;
-});
-
 /**
  * Step 4: Run the Slim application
  *

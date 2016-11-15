@@ -31,7 +31,7 @@ angular
 	}
 })
 
-.controller("RegistroCtrl", function($scope, $auth, $state, jwtHelper, FileUploader, FactoryUsuario, FactoryRutas) {
+.controller("RegistroCtrl", function($scope, $auth, $state, jwtHelper, FactoryUsuario, FactoryRutas) {
 	try
 	{
 		$scope.resultado = {};
@@ -50,17 +50,6 @@ angular
 			$scope.admin = true;
 		}
 
-		$scope.uploader = new FileUploader({url: FactoryRutas.UrlArchivos});
-		$scope.uploader.queueLimit = 10; // indico cuantos archivos permito cargar
-					
-		/* Si quiero restringir los archivos a imagenes añado este filtro */
-		$scope.uploader.filters.push({
-	        name: 'imageFilter',
-	        fn: function(item, options) {
-	            var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
-	            return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
-	        }
-	    });
 	}
 	catch(error)
 	{
@@ -69,15 +58,6 @@ angular
 	$scope.Guardar = function(){
 		try
 		{
-			$scope.uploader.uploadAll();
-			for (var i = 0; i < $scope.uploader.queue.length; i++) {
-				$scope.foto = $scope.uploader.queue[i];
-				if (i==0)
-					$scope.usuario.foto = $scope.foto.file.name;
-				else
-					$scope.usuario.foto = $scope.usuario.foto + ';' + $scope.foto.file.name;
-			};
-
 			FactoryUsuario.Guardar($scope.usuario).then(
 				function(respuesta) { 
 					$scope.resultado.ver = true;   	
