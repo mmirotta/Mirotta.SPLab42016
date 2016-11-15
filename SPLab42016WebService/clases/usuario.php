@@ -9,9 +9,6 @@ class Usuario
   	public $clave;
   	public $nombre;
   	public $perfil;
-  	public $fechaAcceso;
-  	public $fechaCreacion;
-  	public $foto;
   	public $activo;
 
 //--------------------------------------------------------------------------------//
@@ -83,30 +80,15 @@ class Usuario
 			return $consulta->execute();
 	}
 
-	public static function EditarAcceso($usuario)
-	{
-			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-			$consulta =$objetoAccesoDato->RetornarConsulta("
-				UPDATE usuario 
-				SET fechaAcceso=:fechaAcceso
-				WHERE id=:id");
-			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-			$consulta->bindValue(':id',$usuario->id, PDO::PARAM_INT);
-			$consulta->bindValue(':fechaAcceso',$usuario->fechaAcceso, PDO::PARAM_STR);
-			return $consulta->execute();
-	}
-
 	public static function Guardar($usuario)
 	{
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-		$consulta =$objetoAccesoDato->RetornarConsulta("INSERT INTO usuario (nombre,correo,clave,perfil,foto, fechaAcceso,fechaCreacion,activo) 
-														VALUES(:nombre,:correo,:clave,:perfil,:foto,:fechaCreacion,:fechaCreacion,1)");
+		$consulta =$objetoAccesoDato->RetornarConsulta("INSERT INTO usuario (nombre,correo,clave,perfil,activo) 
+														VALUES(:nombre,:correo,:clave,:perfil,1)");
 		$consulta->bindValue(':nombre',$usuario->nombre, PDO::PARAM_STR);
 		$consulta->bindValue(':correo', $usuario->correo, PDO::PARAM_STR);
 		$consulta->bindValue(':clave', $usuario->clave, PDO::PARAM_STR);
 		$consulta->bindValue(':perfil', $usuario->perfil, PDO::PARAM_STR);
-		$consulta->bindValue(':foto', $usuario->foto, PDO::PARAM_STR);
-		$consulta->bindValue(':fechaCreacion', $usuario->fechaCreacion, PDO::PARAM_STR);
 		$consulta->execute();		
 		return $objetoAccesoDato->RetornarUltimoIdInsertado();
 	}	
