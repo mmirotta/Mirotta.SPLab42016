@@ -15,9 +15,9 @@
 	<div class="divListaUsuarios" ng-repeat="usuario in ListadoUsuarios">
 		<div class="row" style="padding: 5px;">
 			<div class="col-lg-10">
-				<h4 style="100%">{{usuario.nombre}}</h4>
-				<p>Correo: {{usuario.correo}}</p>
-				<p>Perfil: {{usuario.perfil}}</p>
+				<h4 style="width:100%; font-size:28px">{{usuario.nombre}}</h4>
+				<p style="font-size:18px">Correo: {{usuario.correo}}</p>
+				<p style="font-size:18px">Perfil: {{usuario.perfil}}</p>
 			</div>
 			<div class="col-lg-2" style="text-align:center">
 				<a ng-click="Modificar(usuario)" ><i class="fa fa-pencil fa-3x"></i></a>
