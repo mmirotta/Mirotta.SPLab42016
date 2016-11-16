@@ -7,7 +7,7 @@ use \Firebase\JWT\JWT;
 $DatosDelModelPorPost = file_get_contents('php://input');
 $user = json_decode($DatosDelModelPorPost);
 
-$usuarioBuscado = Usuario::Verificar($user->correo, $user->clave);
+$usuarioBuscado = Usuario::Verificar($user->correo, $user->clave, $user->nombre);
 
 if ($usuarioBuscado != null)
 {

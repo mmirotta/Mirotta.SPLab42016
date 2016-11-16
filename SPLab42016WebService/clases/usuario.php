@@ -23,12 +23,13 @@ class Usuario
 		return $usuarioBuscado;	
 	}
 
-	public static function Verificar($correo, $clave) 
+	public static function Verificar($correo, $clave, $nombre) 
 	{	
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT * FROM usuario WHERE correo =:correo AND clave =:clave AND activo = 1");
+		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT * FROM usuario WHERE correo =:correo AND clave =:clave AND nombre =:nombre AND activo = 1");
 		$consulta->bindValue(':correo', $correo, PDO::PARAM_STR);
 		$consulta->bindValue(':clave', $clave, PDO::PARAM_STR);
+		$consulta->bindValue(':nombre', $nombre, PDO::PARAM_STR);
 		$consulta->execute();
 		$usuarioBuscado= $consulta->fetchObject('usuario');
 		return $usuarioBuscado;	

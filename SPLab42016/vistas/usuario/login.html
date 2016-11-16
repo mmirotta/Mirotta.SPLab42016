@@ -1,10 +1,14 @@
 <div class="divLogin" name="loginForm">
+  <div class="{{resultado.estilo}}" ng-show="resultado.ver">
+        <span style="font-size:26px;">{{resultado.mensaje}}</span>
+    </div>
   <div class="row">
     <div class="col-lg-4">
       <img src="img/UTN-LOGIN.jpg" style="width:100%">
     </div>
     <div class="col-lg-8">
       <h2 class="h2Login">Iniciar sesión:</h2>
+      <input type="text" placeholder="Nombre" class="txtLogin" name="nombre" ng-model="usuario.nombre" required>
       <input type="text" placeholder="Correo" class="txtLogin" name="correo" ng-model="usuario.correo" required>
       <input type="password" placeholder="Clave" class="txtLogin" name="clave" ng-model="usuario.clave" required>
       <input type="submit" value="Log in" ng-disabled="loginForm.$invalid" class="btnLogin" ng-click="Verificar()">
@@ -15,8 +19,8 @@
     </div>
   </div>
   <div class="row">
-    <input type="submit" value="Administrador" class="btnLogin" style="width:30%; display:inline" ng-click="Acceso('admin@utn.com', '123456')">
-    <input type="submit" value="Vendedor" class="btnLogin" style="width:30%; display:inline" ng-click="Acceso('vendedor@utn.com', '123456')">
-    <input type="submit" value="Comprador" class="btnLogin" style="width:30%; display:inline" ng-click="Acceso('comprador@utn.com', '123456')">
+    <input type="submit" value="Administrador" class="btnLogin" style="width:30%; display:inline" ng-click="Acceso('Administrador','admin@utn.com', '123456')">
+    <input type="submit" value="Vendedor" class="btnLogin" style="width:30%; display:inline" ng-click="Acceso('vendedor','vendedor@utn.com', '123456')">
+    <input type="submit" value="Comprador" class="btnLogin" style="width:30%; display:inline" ng-click="Acceso('comprador','comprador@utn.com', '123456')">
   </div>
 </div>

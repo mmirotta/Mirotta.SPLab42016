@@ -2,9 +2,11 @@ angular
 .module('spLab2016')
 .controller('LoginCtrl', function($scope, $state, $auth, jwtHelper) {
 	$scope.usuario = {};
+	$scope.usuario.nombre = "Administrador";
 	$scope.usuario.correo = "admin@utn.com";
 	$scope.usuario.clave = "123456";
-
+	$scope.resultado = {};
+	$scope.resultado.ver = false;
 	$scope.Verificar = function(){
 		try
 		{
@@ -13,6 +15,12 @@ angular
 					if ($auth.isAuthenticated())
 					{
 						$state.go("menu");
+					}
+					else
+					{
+						$scope.resultado.ver = true;
+						$scope.resultado.estilo = "alert alert-danger";
+						$scope.resultado.mensaje = "Los datos ingresados son incorrectos.";
 					}
 					
 				}).catch(function(response){
@@ -25,9 +33,10 @@ angular
 		}
 	}
 
-	$scope.Acceso = function(correo, clave){
+	$scope.Acceso = function(nombre, correo, clave){
 		$scope.usuario.correo = correo;
 		$scope.usuario.clave = clave;
+		$scope.usuario.nombre = nombre;
 	}
 })
 
