@@ -5,7 +5,7 @@ angular
 	{
 		$scope.usuarioLogeado = jwtHelper.decodeToken($auth.getToken());
 		$scope.logeado = true;
-		if ($scope.usuarioLogeado.perfil != "comprador")
+		if ($scope.usuarioLogeado.perfil == "vendedor")
 		{
 			$scope.nuevoProducto = true;
 		}

@@ -28,6 +28,9 @@ angular
 	$scope.Guardar = function(){
 		try
 		{
+			if (parseInt($scope.producto.porcentaje) > 100)
+				$scope.producto.porcentaje = "100";
+
 			FactoryProducto.Guardar($scope.producto).then(
 				function(respuesta) {  
 					$scope.resultado.ver = true;   	
