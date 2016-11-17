@@ -68,7 +68,7 @@ class Usuario
 	{
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 			$consulta =$objetoAccesoDato->RetornarConsulta("
-				UPDATE usuario 
+				UPDATE misusuarios 
 				SET nombre=:nombre,
 					correo=:correo
 				WHERE id=:id");

@@ -33,6 +33,8 @@ angular
 					$scope.resultado.ver = true;   	
 			    	$scope.resultado.estilo = "alert alert-success";
 					$scope.resultado.mensaje = "Producto Guardado";
+					$scope.producto.nombre = "";
+    				$scope.producto.porcentaje = "";
 				},function(error) {
 					$scope.resultado.ver = true;
 					$scope.resultado.estilo = "alert alert-danger";

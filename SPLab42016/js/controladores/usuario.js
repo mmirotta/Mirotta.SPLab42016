@@ -49,7 +49,6 @@ angular
 	    $scope.usuario.nombre = "Comprador";
 	    $scope.usuario.correo = "comprador@gmail.com";
 	    $scope.usuario.clave = "123456";
-	    $scope.usuario.claveRepetida = "123456";
 	    $scope.usuario.tipo = "comprador";
 	    $scope.usuario.foto = "sin foto"
 		if ($auth.isAuthenticated())
@@ -72,6 +71,9 @@ angular
 					$scope.resultado.ver = true;   	
 			    	$scope.resultado.estilo = "alert alert-success";
 					$scope.resultado.mensaje = "Usuario Guardado";
+					$scope.usuario.nombre = "";
+	    			$scope.usuario.correo = "";
+	    			$scope.usuario.clave = "";
 				},function(error) {
 					console.log(error);
 					$scope.resultado.ver = true;

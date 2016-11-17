@@ -23,7 +23,7 @@
 <div class="intro-header"> 
     <div class="container">
         <div class="row" style="margin-top:1%">
-            <a ui-sref="producto.productos()" ng-if="logeado" style="margin:1%">
+            <a ui-sref="producto.productos()" ng-if="logeado && !admin" style="margin:1%">
                 <img style="width:300px; height:200px" src="img/listadoProductos.jpg">
             </a>
             <a ui-sref="login.usuarios()" ng-if="logeado && admin" style="margin:1%">
@@ -31,7 +31,7 @@
             </a>
         </div>
         <div class="row" style="margin-top:1%">
-            <a ui-sref="producto.productosDirectiva()" ng-if="logeado" style="margin:1%"> 
+            <a ui-sref="producto.productosDirectiva()" ng-if="logeado && !admin" style="margin:1%"> 
                 <img style="width:300px; height:200px" src="img/listadoProductosDirectiva.jpg">
             </a>
             <a ui-sref="login.usuariosDirectiva()" ng-if="logeado && admin" style="margin:1%">
