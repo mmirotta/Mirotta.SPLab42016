@@ -13,7 +13,7 @@ if ($usuarioBuscado != null)
 {
 	$ClaveDeEncriptacion="estaeslaclave";
 	$token["usuario"] = $usuarioBuscado->nombre;
-	$token["perfil"] = $usuarioBuscado->perfil;
+	$token["perfil"] = $usuarioBuscado->tipo;
 	$token["iat"] = time();
 	$token["exp"] = time()+30000;
 
@@ -24,7 +24,7 @@ else
 	$jwt = false;
 }
 
-$ArrayConToken["MiTokenGeneradoEnPHP"] = $jwt; 
+$ArrayConToken["segundoparcial"] = $jwt; 
 echo json_encode($ArrayConToken); 
 
 ?>

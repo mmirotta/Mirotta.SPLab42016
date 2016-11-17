@@ -6,7 +6,7 @@
 	<div class="row">
 		<select ng-model="buscarPerfil" class="txtLogin" style="width:30%; display: inline; margin-left:1%">
 			<option value="todos">Todos</option>
-	    	<option value="admin">Administrador</option>
+	    	<option value="administrador">Administrador</option>
 	    	<option value="vendedor">Vendedor</option>
 	    	<option value="comprador">Comprador</option>
 	    </select>
@@ -17,11 +17,11 @@
 			<div class="col-lg-10">
 				<h4 style="width:100%; font-size:28px">{{usuario.nombre}}</h4>
 				<p style="font-size:18px">Correo: {{usuario.correo}}</p>
-				<p style="font-size:18px">Perfil: {{usuario.perfil}}</p>
+				<p style="font-size:18px">Perfil: {{usuario.tipo}}</p>
 			</div>
 			<div class="col-lg-2" style="text-align:center">
 				<a ng-click="Modificar(usuario)" ><i class="fa fa-pencil fa-3x"></i></a>
-				<a ng-click="Borrar(usuario)" ><i class="fa fa-trash fa-3x"></i></a>
+				<a ng-click="Borrar(usuario)" ng-if="usuario.tipo != 'administrador'"><i class="fa fa-trash fa-3x"></i></a>
 			</div>
 		</div>
 	</div>

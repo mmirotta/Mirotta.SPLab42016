@@ -3,7 +3,7 @@ var miApp = angular.module('spLab2016', ['ui.router', 'angularFileUpload','satel
 miApp.config(function($stateProvider, $urlRouterProvider, $authProvider){
 	//proveedor de autentificacion.
 	$authProvider.loginUrl = 'http://localhost:8080/Mirotta.SPLab42016/SPLab42016WebService/jwt/php/auth.php';
-	$authProvider.tokenName = 'MiTokenGeneradoEnPHP';
+	$authProvider.tokenName = 'segundoparcial';
 	$authProvider.tokenPrefix = 'Aplicacion';
 	//$authProvider.authReader = 'data';
 
@@ -89,7 +89,7 @@ miApp.config(function($stateProvider, $urlRouterProvider, $authProvider){
 		.state(
 			"login.usuariosDirectiva",
 			{
-				url:"/usuarios",
+				url:"/usuariosDirectiva",
 				cache:false,
 				views:{
 					"contenido": {

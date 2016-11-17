@@ -17,8 +17,7 @@ angular
 		
 		$scope.producto={};
 	    $scope.producto.nombre = "Producto 1";
-	    $scope.producto.descripcion = "Producto 1";
-	    $scope.producto.precio = "15";
+	    $scope.producto.porcentaje = "15";
 	}
  	catch(error)
  	{
@@ -70,6 +69,7 @@ angular
 		 	FactoryProducto.BuscarTodos().then(
 		 		function(respuesta) {     	
 	      			$scope.ListadoProductos = respuesta;
+	      			console.info(respuesta);
 		    	},function(error) {
 	     			$scope.ListadoProductos= [];
 		 	});
@@ -82,10 +82,10 @@ angular
 		    $scope.resultado.mensaje = "Error en el controlador productos.";
 	 	}
 
-	 	$scope.Borrar = function(producto){
+	 	$scope.BorrarProducto = function(id){
 	 		try
 	 		{
-	 			FactoryProducto.Borrar(producto.id);
+	 			FactoryProducto.Borrar(id);
  				$scope.resultado.ver = true;
 		 		$scope.resultado.estilo = "alert alert-success";
 				$scope.resultado.mensaje = "Producto Eliminado";

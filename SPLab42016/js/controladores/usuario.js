@@ -2,9 +2,9 @@ angular
 .module('spLab2016')
 .controller('LoginCtrl', function($scope, $state, $auth, jwtHelper) {
 	$scope.usuario = {};
-	$scope.usuario.nombre = "Administrador";
-	$scope.usuario.correo = "admin@utn.com";
-	$scope.usuario.clave = "123456";
+	$scope.usuario.nombre = "admin";
+	$scope.usuario.correo = "admin@admin.com";
+	$scope.usuario.clave = "321";
 	$scope.resultado = {};
 	$scope.resultado.ver = false;
 	$scope.Verificar = function(){
@@ -50,8 +50,8 @@ angular
 	    $scope.usuario.correo = "comprador@gmail.com";
 	    $scope.usuario.clave = "123456";
 	    $scope.usuario.claveRepetida = "123456";
-	    $scope.usuario.perfil = "comprador";
-
+	    $scope.usuario.tipo = "comprador";
+	    $scope.usuario.foto = "sin foto"
 		if ($auth.isAuthenticated())
 		{
 			$scope.usuarioLogeado = jwtHelper.decodeToken($auth.getToken());

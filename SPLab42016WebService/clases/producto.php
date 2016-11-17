@@ -6,9 +6,7 @@ class Producto
 //--ATRIBUTOS
 	public $id;
 	public $nombre;
- 	public $descripcion;
-  	public $precio;
-  	public $vigente;
+ 	public $porcentaje;
 
 
 //--------------------------------------------------------------------------------//
@@ -18,10 +16,10 @@ class Producto
 
 
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT * FROM producto WHERE id =:id");
+		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT * FROM misproductos WHERE id =:id");
 		$consulta->bindValue(':id', $id, PDO::PARAM_INT);
 		$consulta->execute();
-		$productoBuscado= $consulta->fetchObject('producto');
+		$misproductoBuscado= $consulta->fetchObject('producto');
 		return $productoBuscado;	
 					
 	}
@@ -29,7 +27,7 @@ class Producto
 	public static function Buscar()
 	{
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT * FROM producto WHERE vigente = 1");
+		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT * FROM misproductos");
 		$consulta->execute();			
 		$arrProducto= $consulta->fetchAll(PDO::FETCH_CLASS, "producto");	
 		return $arrProducto;
@@ -38,7 +36,7 @@ class Producto
 	public static function Borrar($id)
 	{	
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-		$consulta =$objetoAccesoDato->RetornarConsulta("UPDATE producto SET vigente=0 WHERE id=:id");	
+		$consulta =$objetoAccesoDato->RetornarConsulta("DELETE FROM misproductos WHERE id=:id");	
 		$consulta->bindValue(':id',$id, PDO::PARAM_INT);		
 		$consulta->execute();
 		return $consulta->rowCount();
@@ -49,18 +47,14 @@ class Producto
 	{
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 			$consulta =$objetoAccesoDato->RetornarConsulta("
-				UPDATE producto 
+				UPDATE misproductos
 				SET nombre=:nombre,
-					descripcion=:descripcion,
-					precio=:precio,
-					vigente=:vigente
+					porcentaje=:porcentaje
 				WHERE id=:id");
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
 			$consulta->bindValue(':id',$producto->id, PDO::PARAM_INT);
 			$consulta->bindValue(':nombre',$producto->nombre, PDO::PARAM_STR);
-			$consulta->bindValue(':descripcion',$producto->descripcion, PDO::PARAM_STR);
-			$consulta->bindValue(':precio',$producto->precio, PDO::PARAM_STR);
-			$consulta->bindValue(':vigente',$producto->vigente, PDO::PARAM_STR);
+			$consulta->bindValue(':porcentaje',$producto->porcentaje, PDO::PARAM_STR);
 			return $consulta->execute();
 	}
 
@@ -71,11 +65,10 @@ class Producto
 	public static function Guardar($producto)
 	{
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-		$consulta =$objetoAccesoDato->RetornarConsulta("INSERT INTO producto (nombre,descripcion,precio, vigente)
-														VALUES (:nombre,:descripcion,:precio,1)");
+		$consulta =$objetoAccesoDato->RetornarConsulta("INSERT INTO misproductos (nombre,porcentaje)
+														VALUES (:nombre,:porcentaje)");
 		$consulta->bindValue(':nombre',$producto->nombre, PDO::PARAM_STR);
-		$consulta->bindValue(':descripcion',$producto->descripcion, PDO::PARAM_STR);
-		$consulta->bindValue(':precio', $producto->precio, PDO::PARAM_STR);
+		$consulta->bindValue(':porcentaje',$producto->porcentaje, PDO::PARAM_STR);
 		$consulta->execute();		
 		return $objetoAccesoDato->RetornarUltimoIdInsertado();
 	

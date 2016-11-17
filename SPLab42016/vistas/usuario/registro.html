@@ -10,13 +10,12 @@
     		<input type="text" placeholder="Nombre" class="txtLogin" name="nombre" ng-model='usuario.nombre' required>
 	    	<input type="text" placeholder="Usuario" class="txtLogin" name="correo" ng-model='usuario.correo' required>
 	    	<input type="password" placeholder="Clave" class="txtLogin" name="clave" ng-model='usuario.clave' required>
-	    	<input type="password" placeholder="Repetir Clave" class="txtLogin" name="claveRepetida" ng-model='usuario.claveRepetida' required>
 	    	<select ng-model="usuario.perfil" class="txtLogin" ng-if="admin">
-		    	<option value="admin">Administrador</option>
+		    	<option value="administrador">Administrador</option>
 		    	<option value="vendedor">Vendedor</option>
 		    	<option value="comprador">Comprador</option>
 		    </select>
-	    	<input type="submit" value="Guardar" class="btnLogin" ng-disabled="formAlta.$invalid && (usuario.clave == usuario.copiaClave)" ng-click="Guardar()">
+	    	<input type="submit" value="Guardar" class="btnLogin" ng-disabled="formAlta.$invalid" ng-click="Guardar()">
 	    </div>
     </div>
 </form>

@@ -14,7 +14,7 @@ angular
 			$scope.nuevoProducto = false;
 		}
 
-		if ($scope.usuarioLogeado.perfil == "admin")
+		if ($scope.usuarioLogeado.perfil == "administrador")
 			$scope.admin = true;
 		else
 			$scope.admin = false;

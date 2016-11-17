@@ -8,15 +8,15 @@ class Usuario
  	public $correo;
   	public $clave;
   	public $nombre;
-  	public $perfil;
-  	public $activo;
+  	public $tipo;
+  	public $foto;
 
 //--------------------------------------------------------------------------------//
 //--METODO DE CLASE
 	public static function Cargar($idParametro) 
 	{	
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT * FROM usuario WHERE id =:id");
+		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT * FROM misusuarios WHERE id =:id");
 		$consulta->bindValue(':id', $idParametro, PDO::PARAM_INT);
 		$consulta->execute();
 		$usuarioBuscado= $consulta->fetchObject('usuario');
@@ -26,7 +26,7 @@ class Usuario
 	public static function Verificar($correo, $clave, $nombre) 
 	{	
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT * FROM usuario WHERE correo =:correo AND clave =:clave AND nombre =:nombre AND activo = 1");
+		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT * FROM misusuarios WHERE correo =:correo AND clave =:clave AND nombre =:nombre");
 		$consulta->bindValue(':correo', $correo, PDO::PARAM_STR);
 		$consulta->bindValue(':clave', $clave, PDO::PARAM_STR);
 		$consulta->bindValue(':nombre', $nombre, PDO::PARAM_STR);
@@ -38,17 +38,17 @@ class Usuario
 	public static function Buscar()
 	{
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT * FROM usuario WHERE activo = 1");
+		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT * FROM misusuarios");
 		$consulta->execute();			
 		$arrUsuarios= $consulta->fetchAll(PDO::FETCH_CLASS, "usuario");	
 		return $arrUsuarios;
 	}
 
-	public static function BuscarPorPerfil($perfil)
+	public static function BuscarPorPerfil($tipo)
 	{
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT * FROM usuario WHERE perfil=:perfil AND activo = 1");
-		$consulta->bindValue(':perfil',$perfil, PDO::PARAM_STR);
+		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT * FROM misusuarios WHERE tipo=:tipo");
+		$consulta->bindValue(':tipo',$tipo, PDO::PARAM_STR);
 		$consulta->execute();			
 		$arrUsuarios= $consulta->fetchAll(PDO::FETCH_CLASS, "usuario");	
 		return $arrUsuarios;
@@ -57,7 +57,7 @@ class Usuario
 	public static function Borrar($id)
 	{	
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-		$consulta =$objetoAccesoDato->RetornarConsulta("UPDATE usuario SET activo=0 WHERE id=:id");	
+		$consulta =$objetoAccesoDato->RetornarConsulta("DELETE FROM misusuarios WHERE id=:id");	
 		$consulta->bindValue(':id',$id, PDO::PARAM_INT);		
 		$consulta->execute();
 		return $consulta->rowCount();
@@ -70,26 +70,25 @@ class Usuario
 			$consulta =$objetoAccesoDato->RetornarConsulta("
 				UPDATE usuario 
 				SET nombre=:nombre,
-					correo=:correo,
-					activo=:activo
+					correo=:correo
 				WHERE id=:id");
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
 			$consulta->bindValue(':id',$usuario->id, PDO::PARAM_INT);
 			$consulta->bindValue(':nombre',$usuario->nombre, PDO::PARAM_STR);
 			$consulta->bindValue(':correo',$usuario->correo, PDO::PARAM_STR);
-			$consulta->bindValue(':activo',$usuario->activo, PDO::PARAM_INT);
 			return $consulta->execute();
 	}
 
 	public static function Guardar($usuario)
 	{
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-		$consulta =$objetoAccesoDato->RetornarConsulta("INSERT INTO usuario (nombre,correo,clave,perfil,activo) 
-														VALUES(:nombre,:correo,:clave,:perfil,1)");
+		$consulta =$objetoAccesoDato->RetornarConsulta("INSERT INTO misusuarios (nombre,correo,clave,tipo,foto) 
+														VALUES(:nombre,:correo,:clave,:tipo,:foto)");
 		$consulta->bindValue(':nombre',$usuario->nombre, PDO::PARAM_STR);
 		$consulta->bindValue(':correo', $usuario->correo, PDO::PARAM_STR);
 		$consulta->bindValue(':clave', $usuario->clave, PDO::PARAM_STR);
-		$consulta->bindValue(':perfil', $usuario->perfil, PDO::PARAM_STR);
+		$consulta->bindValue(':tipo', $usuario->tipo, PDO::PARAM_STR);
+		$consulta->bindValue(':foto', $usuario->foto, PDO::PARAM_STR);
 		$consulta->execute();		
 		return $objetoAccesoDato->RetornarUltimoIdInsertado();
 	}	
